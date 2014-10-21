@@ -1,0 +1,23 @@
+﻿<Window x:Class="Clicker_Heroes_Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:b="clr-namespace:Clicker_Heroes_Calculator.Behaviors"
+        Title="Clicker Heroes Calculator" Height="750" Width="1500" 
+        b:KeyBehaviour.KeyDownCommand="{Binding KeyDownCommand}"
+        b:KeyBehaviour.KeyUpCommand="{Binding KeyUpCommand}"
+        >
+
+    <Window.Resources>
+           <ResourceDictionary Source="MainWindowResources.xaml" />       
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ContentPresenter Grid.Column="0" Content="{Binding Path=Heroes}"/>
+        <Button Grid.Column="1"></Button>
+    </Grid>
+
+</Window>

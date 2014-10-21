@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="Clicker_Heroes_Calculator.Views.HeroView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Clicker_Heroes_Calculator.ViewModels"
+             xmlns:v="clr-namespace:Clicker_Heroes_Calculator.Views"
+             xmlns:input="clr-namespace:System.Windows.Input;assembly=WindowsBase"
+             xmlns:controls="clr-namespace:Clicker_Heroes_Calculator.Controls"
+             mc:Ignorable="d"          
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <CollectionViewSource
+            x:Key="HeroUpgrades" 
+            Source="{Binding Path=HeroUpgrades}"/>
+
+        <DataTemplate x:Key="UpgradeView">
+            <v:UpgradeView DataContext="{Binding}" />
+        </DataTemplate>
+
+        <Style x:Key="LevelUpButton" TargetType="{x:Type Button}">
+            <Setter Property="Content" Value="{Binding}" />
+            <Setter Property="ContentTemplate" Value="{DynamicResource LevelUpCost}" />
+            <Setter Property="Command" Value="{Binding Path=LevelUpCommand}" />
+            <Setter Property="Height" Value="72px" />
+            <Setter Property="Width" Value="128px" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border" 
+                      BorderThickness="0"
+                      Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    RecognizesAccessKey="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="LevelUpCost" DataType="{x:Type vm:HeroViewModel}">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ContentControl FontSize="20px" Content="{Binding LevelUpButtonText}" HorizontalAlignment="Center" Foreground="Gold" Style="{DynamicResource OutlinedText}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="..\Resources\Images\goldicon.png" Height="25" Width="25" />
+                    <ContentControl Name="Cost" FontSize="18px" Content="{Binding LevelUpCost}" Foreground="Yellow" Style="{DynamicResource OutlinedText}" />
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <VisualBrush x:Key="LevelUpButtonImage">
+            <VisualBrush.Visual>
+                <controls:NineGridImage Source="..\Resources\Images\levelupbutton.png" Width="{Binding ElementName=LevelUpButton, Path=Width}" Height="{Binding ElementName=LevelUpButton, Path=Height}" Offsets="10 10"/>
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+        <VisualBrush x:Key="HeroPanelBackground">
+            <VisualBrush.Visual>
+                <controls:NineGridImage Source="..\Resources\Images\herobackground.png" Width="{Binding ElementName=HeroPanel, Path=Width}" Height="{Binding ElementName=HeroPanel, Path=Height}" Offsets="10 10"/>
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+        <Style x:Key="LevelUpButtonPopupStyle" TargetType="Popup">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=LevelUpButton,
+                                                   Path=IsMouseOver}" 
+                                 Value="True">
+                    <Setter Property="IsOpen" Value="true" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="LevelTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
+                      BorderBrush="{TemplateBinding Border.BorderBrush}"
+                      Background="{TemplateBinding Panel.Background}"
+                      Name="border"
+                      SnapsToDevicePixels="True">
+                            <Grid>
+                                <Grid.Resources>
+                                    <TranslateTransform x:Key="Up" X="2" Y="1" />
+                                    <TranslateTransform x:Key="Down" X="2" Y="-1" />
+                                    <TranslateTransform x:Key="Left" X="3" Y="0" />
+                                    <TranslateTransform x:Key="Right" X="1" Y="0" />
+                                    <DropShadowEffect x:Key="DropShadowEffect" ShadowDepth="0" BlurRadius="3" Color="#FF666666" />
+                                </Grid.Resources>
+                                <TextBlock RenderTransform="{StaticResource Up}" Foreground="#FF666666" Text="{TemplateBinding Text}"/>
+                                <TextBlock RenderTransform="{StaticResource Down}" Foreground="#FF666666" Text="{TemplateBinding Text}"/>
+                                <TextBlock RenderTransform="{StaticResource Left}" Foreground="#FF666666" Text="{TemplateBinding Text}"/>
+                                <TextBlock RenderTransform="{StaticResource Right}" Foreground="#FF666666" Text="{TemplateBinding Text}"/>
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" Effect="{StaticResource DropShadowEffect}"
+                               VerticalScrollBarVisibility="Hidden"
+                               Name="PART_ContentHost"
+                               Focusable="False" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                <Setter Property="Border.BorderBrush" TargetName="border" Value="Black"/>
+                                <Setter Property="Border.Background" TargetName="border" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="UIElement.IsKeyboardFocused" Value="True">
+                                <Setter Property="Border.BorderBrush" TargetName="border" Value="Black"/>
+                                <Setter Property="Border.Background" TargetName="border" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="EmptyText" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="0,0,10,10"/>
+            <Style.Triggers>
+                <Trigger Property="Text" Value="">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Name="HeroPanel" Background="{StaticResource HeroPanelBackground}" Width="510px" Height="102px" Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="A" />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Popup Name="LevelUpButtonPopup" Width="300" Placement="Right" AllowsTransparency="True" Style="{StaticResource LevelUpButtonPopupStyle}">
+            <Border Background="#D5000000" BorderBrush="Bisque" BorderThickness="5" CornerRadius="8,8,3,3">
+                <StackPanel Orientation="Vertical" Margin="5" >
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="0,0,10,10"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock Text="{Binding Path=Name}" FontSize="14"/>
+                    <TextBlock Text="{Binding Path=CurrentDPSPopup}" Foreground="White" Style="{StaticResource EmptyText}"/>
+                    <TextBlock Text="{Binding Path=NextLevelDPS}" Foreground="Green"/>
+                    <TextBlock Text="{Binding Path=LevelMultipliersPopup}" Foreground="White" Style="{StaticResource EmptyText}"/>
+                    <TextBlock Text="{Binding Path=Description}" TextWrapping="Wrap" Foreground="Gold"/>
+                    <TextBlock Text="Hold Shift for x10, 'Z' for x25, 'Ctrl' for x100" Foreground="Green"/>
+                    <TextBlock Text="{Binding Path=GildedPopup}" Foreground="Gold" Style="{StaticResource EmptyText}"/>
+                </StackPanel>
+            </Border>
+        </Popup>
+        <!--TODO: Implement the DeLevelCommand to this button-->
+        <Button Grid.Column="0" Name="LevelUpButton" Grid.Row="2" Background="{StaticResource LevelUpButtonImage}" Style="{StaticResource LevelUpButton}" />
+        <Grid Grid.Column="1" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ContentControl Grid.Row="0" FontSize="14px" Content="{Binding Path=Name}" HorizontalAlignment="Right" Foreground="White" Style="{DynamicResource OutlinedText}" />
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+                <ContentControl Grid.Column="0" FontSize="20px" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding Path=CurrentDPS}" Foreground="White" Style="{DynamicResource OutlinedText}" />
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                    <ContentControl FontSize="20px" Content="Lvl " VerticalAlignment="Center" Foreground="White" Style="{DynamicResource OutlinedText}" />
+                    <TextBox Text="{Binding Path=Level, UpdateSourceTrigger=PropertyChanged}" FontSize="20px" VerticalAlignment="Center" Foreground="White" MinWidth="20" MaxLength="4" Style="{StaticResource LevelTextBoxStyle}"/>
+                </StackPanel>
+            </Grid>
+            <ItemsControl Name="Upgrades" Grid.Row="2" DataContext="{StaticResource HeroUpgrades}" ItemsSource="{Binding}" ItemTemplate="{StaticResource UpgradeView}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Grid>
+        <Image Grid.Column="2" Source="{Binding Path=HeroImage}" Stretch="None" />
+    </Grid>
+</UserControl>

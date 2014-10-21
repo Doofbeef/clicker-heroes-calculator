@@ -1,0 +1,194 @@
+﻿<!-- 
+This resource dictionary is used by the MainWindow. 
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:Clicker_Heroes_Calculator.ViewModels"
+                    xmlns:vw="clr-namespace:Clicker_Heroes_Calculator.Views"
+                    xmlns:controls="clr-namespace:Clicker_Heroes_Calculator.Controls">
+
+    <!-- 
+  This template applies a AllHeroView to an instance  
+  of the AllHeroViewModel class shown in the main window.
+  -->
+    <DataTemplate DataType="{x:Type vm:AllHeroesViewModel}">
+        <vw:AllHeroesView />
+    </DataTemplate>
+
+    <Style TargetType="{x:Type vw:AllHeroesView}">
+        <Setter Property="FontFamily" Value="..\Resources\Fonts\#Matiz" />
+    </Style>
+
+    <Style TargetType="Rectangle">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
+
+    <Style TargetType="{x:Type controls:NineGridImage}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:NineGridImage}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Rectangle x:Name="PART_topleft">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Path=Source, RelativeSource={RelativeSource AncestorType=controls:NineGridImage}}" 
+                                            x:Name="brush1"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="1" Grid.Row="0" x:Name="PART_topmid">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Path=Source, RelativeSource={RelativeSource AncestorType=controls:NineGridImage}}" 
+                                            x:Name="brush2"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="2" Grid.Row="0">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Path=Source, RelativeSource={RelativeSource AncestorType=controls:NineGridImage}}" 
+                                            x:Name="brush3"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <Rectangle Grid.Row="1" x:Name="PART_midleft">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Path=Source, RelativeSource={RelativeSource AncestorType=controls:NineGridImage}}" 
+                                            x:Name="brush4"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="1" Grid.Row="1">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Path=Source, RelativeSource={RelativeSource AncestorType=controls:NineGridImage}}" 
+                                            x:Name="brush5"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="2" Grid.Row="1">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Path=Source, RelativeSource={RelativeSource AncestorType=controls:NineGridImage}}" 
+                                            x:Name="brush6"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <Rectangle Grid.Row="2">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Path=Source, RelativeSource={RelativeSource AncestorType=controls:NineGridImage}}" 
+                                            x:Name="brush7"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="1" Grid.Row="2">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Path=Source, RelativeSource={RelativeSource AncestorType=controls:NineGridImage}}" 
+                                            x:Name="brush8"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="2" Grid.Row="2" x:Name="PART_bottomright">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Path=Source, RelativeSource={RelativeSource AncestorType=controls:NineGridImage}}" 
+                                            x:Name="brush9"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OutlinedText" TargetType="{x:Type ContentControl}">
+        <!-- Some Style Setters -->
+        <!-- Border Brush Must be equal '0' because TextBlock that emulate the stroke will using the BorderBrush as to define 'Stroke' color-->
+        <Setter Property="BorderThickness" Value="0"/>
+        <!-- Border Brush define 'Stroke' Color-->
+        <Setter Property="BorderBrush" Value="#FF666666" />
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Canvas Width="{Binding ActualWidth, ElementName=FillText}" Height="{Binding ActualHeight, ElementName=FillText}">
+                        <Canvas.Resources>
+                            <TranslateTransform x:Key="Up" X="0" Y="1" />
+                            <TranslateTransform x:Key="Down" X="0" Y="-1" />
+                            <TranslateTransform x:Key="Left" X="1" Y="0" />
+                            <TranslateTransform x:Key="Right" X="-1" Y="0" />
+                            <DropShadowEffect x:Key="DropShadowEffect" ShadowDepth="0" BlurRadius="3" Color="{TemplateBinding BorderBrush}" />
+                            <!-- Style to ease the duplication of Text Blocks that emulate the stroke: Binding to one element (or to template) is the first part of the Trick -->
+                            <Style x:Key="OutlinedTextStrokeTextBlock_Style" TargetType="{x:Type TextBlock}">
+                                <Setter Property="Text" Value="{Binding Text, ElementName=FillText}"/>
+                                <Setter Property="FontSize" Value="{Binding FontSize, ElementName=FillText}"/>
+                                <Setter Property="FontFamily" Value="{Binding FontFamily, ElementName=FillText}"/>
+                                <Setter Property="FontStyle" Value="{Binding FontStyle, ElementName=FillText}"/>
+                                <Setter Property="FontWeight" Value="{Binding FontWeight, ElementName=FillText}"/>
+                                <Setter Property="Padding" Value="{Binding TextAlignment, ElementName=Padding}"/>
+                                <Setter Property="TextAlignment" Value="{Binding TextAlignment, ElementName=FillText}"/>
+                                <Setter Property="VerticalAlignment" Value="{Binding VerticalAlignment, ElementName=FillText}"/>
+                            </Style>
+                        </Canvas.Resources>
+                        <!-- Offseting the Text block will create the outline, the margin is the Stroke Width-->
+                        <TextBlock Foreground="{TemplateBinding BorderBrush}" RenderTransform="{StaticResource Up}" Style="{DynamicResource OutlinedTextStrokeTextBlock_Style}"/>
+                        <TextBlock Foreground="{TemplateBinding BorderBrush}" RenderTransform="{StaticResource Down}" Style="{DynamicResource OutlinedTextStrokeTextBlock_Style}"/>
+                        <TextBlock Foreground="{TemplateBinding BorderBrush}" RenderTransform="{StaticResource Left}" Style="{DynamicResource OutlinedTextStrokeTextBlock_Style}"/>
+                        <TextBlock Foreground="{TemplateBinding BorderBrush}" RenderTransform="{StaticResource Right}" Style="{DynamicResource OutlinedTextStrokeTextBlock_Style}"/>
+                        <!-- Base TextBlock Will be the Fill -->
+                        <TextBlock x:Name="FillText" Text="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}"
+                               FontStyle="{TemplateBinding FontStyle}" FontWeight="{TemplateBinding FontWeight}" Padding="0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                               TextAlignment="{TemplateBinding HorizontalContentAlignment}" Effect="{StaticResource DropShadowEffect}"
+                               Style="{DynamicResource TbMediaOverlay_Style}"/>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OutlinedTextBox" TargetType="{x:Type ContentControl}">
+        <!-- Some Style Setters -->
+        <!-- Border Brush Must be equal '0' because TextBlock that emulate the stroke will using the BorderBrush as to define 'Stroke' color-->
+        <Setter Property="BorderThickness" Value="0"/>
+        <!-- Border Brush define 'Stroke' Color-->
+        <Setter Property="BorderBrush" Value="#FF666666" />
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Canvas Width="{Binding ActualWidth, ElementName=FillText}" Height="{Binding ActualHeight, ElementName=FillText}">
+                        <Canvas.Resources>
+                            <TranslateTransform x:Key="Up" X="0" Y="1" />
+                            <TranslateTransform x:Key="Down" X="0" Y="-1" />
+                            <TranslateTransform x:Key="Left" X="1" Y="0" />
+                            <TranslateTransform x:Key="Right" X="-1" Y="0" />
+                            <DropShadowEffect x:Key="DropShadowEffect" ShadowDepth="0" BlurRadius="3" Color="{TemplateBinding BorderBrush}" />
+                            <!-- Style to ease the duplication of Text Blocks that emulate the stroke: Binding to one element (or to template) is the first part of the Trick -->
+                            <Style x:Key="OutlinedTextStrokeTextBlock_Style" TargetType="{x:Type TextBlock}">
+                                <Setter Property="Text" Value="{Binding Text, ElementName=FillText}"/>
+                                <Setter Property="FontSize" Value="{Binding FontSize, ElementName=FillText}"/>
+                                <Setter Property="FontFamily" Value="{Binding FontFamily, ElementName=FillText}"/>
+                                <Setter Property="FontStyle" Value="{Binding FontStyle, ElementName=FillText}"/>
+                                <Setter Property="FontWeight" Value="{Binding FontWeight, ElementName=FillText}"/>
+                                <Setter Property="Padding" Value="{Binding TextAlignment, ElementName=Padding}"/>
+                                <Setter Property="TextAlignment" Value="{Binding TextAlignment, ElementName=FillText}"/>
+                                <Setter Property="VerticalAlignment" Value="{Binding VerticalAlignment, ElementName=FillText}"/>
+                            </Style>
+                        </Canvas.Resources>
+                        <!-- Offseting the Text block will create the outline, the margin is the Stroke Width-->
+                        <TextBlock Foreground="{TemplateBinding BorderBrush}" RenderTransform="{StaticResource Up}" Style="{DynamicResource OutlinedTextStrokeTextBlock_Style}"/>
+                        <TextBlock Foreground="{TemplateBinding BorderBrush}" RenderTransform="{StaticResource Down}" Style="{DynamicResource OutlinedTextStrokeTextBlock_Style}"/>
+                        <TextBlock Foreground="{TemplateBinding BorderBrush}" RenderTransform="{StaticResource Left}" Style="{DynamicResource OutlinedTextStrokeTextBlock_Style}"/>
+                        <TextBlock Foreground="{TemplateBinding BorderBrush}" RenderTransform="{StaticResource Right}" Style="{DynamicResource OutlinedTextStrokeTextBlock_Style}"/>
+                        <!-- Base TextBlock Will be the Fill -->
+                        <TextBox x:Name="FillText" Text="{Binding Path=Level, UpdateSourceTrigger=PropertyChanged}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}"
+                               FontStyle="{TemplateBinding FontStyle}" FontWeight="{TemplateBinding FontWeight}" Padding="0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                               TextAlignment="{TemplateBinding HorizontalContentAlignment}" Effect="{StaticResource DropShadowEffect}" Background="Transparent" Width="Auto" Height="Auto" BorderThickness="0" Foreground="White"/>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

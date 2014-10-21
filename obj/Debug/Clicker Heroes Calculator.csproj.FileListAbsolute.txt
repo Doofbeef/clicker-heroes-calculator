@@ -1,0 +1,23 @@
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\MainWindow.g.cs
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Views\AllHeroesView.g.cs
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Views\UpgradeView.g.cs
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\App.g.cs
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Clicker Heroes Calculator_MarkupCompile.cache
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Clicker Heroes Calculator_MarkupCompile.lref
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\bin\Debug\Clicker Heroes Calculator.exe.config
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\bin\Debug\Clicker Heroes Calculator.exe
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\bin\Debug\Clicker Heroes Calculator.pdb
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\bin\Debug\Newtonsoft.Json.dll
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Views\HeroView.g.cs
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\MainWindow.baml
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\MainWindowResources.baml
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Views\AllHeroesView.baml
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Views\HeroView.baml
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Views\UpgradeView.baml
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Clicker Heroes Calculator.g.resources
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Clicker_Heroes_Calculator.Properties.Resources.resources
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Clicker Heroes Calculator.csproj.GenerateResource.Cache
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Clicker Heroes Calculator.exe
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Clicker Heroes Calculator.pdb
+C:\DEVEL\Clicker Heroes Calculator\Clicker Heroes Calculator\obj\Debug\Clicker Heroes Calculator.csprojResolveAssemblyReference.cache
